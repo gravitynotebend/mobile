@@ -26,6 +26,8 @@ export { default as ArrowLeft01Icon } from '@hugeicons/core-free-icons/dist/esm/
 export { default as Building03Icon } from '@hugeicons/core-free-icons/dist/esm/Building03Icon';
 export { default as UserCircleIcon } from '@hugeicons/core-free-icons/dist/esm/UserCircleIcon';
 export { default as UserGroupIcon } from '@hugeicons/core-free-icons/dist/esm/UserGroupIcon';
+export { default as Logout02Icon } from '@hugeicons/core-free-icons/dist/esm/Logout02Icon';
+export { default as Tick02Icon } from '@hugeicons/core-free-icons/dist/esm/Tick02Icon';
 
 // Статусы / данные
 export { default as CheckmarkCircle02Icon } from '@hugeicons/core-free-icons/dist/esm/CheckmarkCircle02Icon';

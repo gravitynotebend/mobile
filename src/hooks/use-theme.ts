@@ -11,7 +11,7 @@ import { use$ } from '@legendapp/state/react';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { themePref$ } from '@/state/theme';
-import { Colors, type ColorScheme, type Theme } from '@/theme/tokens';
+import { accents, Colors, type AccentPalette, type ColorScheme, type Theme } from '@/theme/tokens';
 
 export function useColorSchemeResolved(): ColorScheme {
   const system = useColorScheme();
@@ -22,4 +22,9 @@ export function useColorSchemeResolved(): ColorScheme {
 
 export function useTheme(): Theme {
   return Colors[useColorSchemeResolved()];
+}
+
+/** Акцентная палитра для текущей схемы (иконки-плитки, чипы, графики). */
+export function useAccent(): AccentPalette {
+  return accents[useColorSchemeResolved()];
 }

@@ -5,8 +5,8 @@
  */
 import { View, StyleSheet } from 'react-native';
 
+import { AppHeader } from '@/components/app-header';
 import { InstitutionCard } from '@/components/institution-card';
-import { ScreenHeader } from '@/components/screen-header';
 import { ThemeToggle } from '@/components/theme-toggle';
 import {
   AnalyticsUpIcon,
@@ -19,9 +19,7 @@ import { Button, Card, Divider, ListRow, Screen, Tag, Text } from '@/ui';
 
 export default function OverviewScreen() {
   return (
-    <Screen>
-      <ScreenHeader title="Обзор" subtitle="Централизованная бухгалтерия" />
-
+    <Screen header={<AppHeader variant="home" title="ЦентрБаланс" />}>
       <InstitutionCard />
 
       <Card>

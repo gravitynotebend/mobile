@@ -5,8 +5,6 @@
  * (шрифты, нижний отступ под таб-бар) — в `@/constants/platform` (+ `.ios`/`.android`),
  * чтобы не использовать `Platform.select`.
  */
-import '@/global.css';
-
 export { Colors, type ThemeColor } from '@/theme/tokens';
 export { Fonts, BottomTabInset } from '@/constants/platform';
 

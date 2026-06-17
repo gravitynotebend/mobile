@@ -1,14 +1,16 @@
 /**
- * Платформенные константы — вариант по умолчанию (web и прочие цели).
+ * Платформенные константы — вариант по умолчанию.
  *
  * Реальные значения для iOS/Android лежат в `platform.ios.ts` / `platform.android.ts`.
  * Так мы избегаем `Platform.select` и разводим различия по расширениям файлов.
+ * Этот базовый файл — фолбэк и источник типов; на устройстве всегда выбирается
+ * `.ios`/`.android`.
  */
 export const Fonts = {
-  sans: 'var(--font-display)',
-  serif: 'var(--font-serif)',
-  rounded: 'var(--font-rounded)',
-  mono: 'var(--font-mono)',
+  sans: 'System',
+  serif: 'serif',
+  rounded: 'System',
+  mono: 'monospace',
 } as const;
 
-export const BottomTabInset = 0;
+export const BottomTabInset = 64;

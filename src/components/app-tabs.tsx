@@ -2,7 +2,7 @@
  * Таб-бар по умолчанию (Android и прочие нативные цели).
  *
  * Сплошной фон из темы + индикатор и ripple в фирменном цвете. Версия для iOS
- * с liquid glass — в `app-tabs.ios.tsx`, веб-версия — в `app-tabs.web.tsx`.
+ * с liquid glass — в `app-tabs.ios.tsx`.
  */
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
 

@@ -8,6 +8,7 @@ export default function AssistantScreen() {
       subtitle="AI-помощник бухгалтера"
       icon={BubbleChatIcon}
       accent="violet"
+      showAssistantShortcut={false}
       summary="Диалоговый помощник по учёту и нормативке с анимированным аватаром, как в вебе."
       upcoming={[
         'Чат с историей сообщений',
