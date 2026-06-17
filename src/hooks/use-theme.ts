@@ -1,14 +1,25 @@
 /**
- * Learn more about light and dark modes:
- * https://docs.expo.dev/guides/color-schemes/
+ * Разрешение темы: комбинирует системную схему (`useColorScheme`) с сохранённым
+ * предпочтением пользователя (`themePref$`). Возвращает готовый набор токенов.
+ *
+ * Подписка на `themePref$` точечная (`use$`), поэтому перерисовываются только
+ * компоненты, реально использующие тему.
+ *
+ * Подробнее о светлой/тёмной темах: https://docs.expo.dev/guides/color-schemes/
  */
+import { use$ } from '@legendapp/state/react';
 
-import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { themePref$ } from '@/state/theme';
+import { Colors, type ColorScheme, type Theme } from '@/theme/tokens';
 
-export function useTheme() {
-  const scheme = useColorScheme();
-  const theme = scheme === 'unspecified' ? 'light' : scheme;
+export function useColorSchemeResolved(): ColorScheme {
+  const system = useColorScheme();
+  const pref = use$(themePref$);
+  if (pref === 'light' || pref === 'dark') return pref;
+  return system === 'dark' ? 'dark' : 'light';
+}
 
-  return Colors[theme];
+export function useTheme(): Theme {
+  return Colors[useColorSchemeResolved()];
 }
