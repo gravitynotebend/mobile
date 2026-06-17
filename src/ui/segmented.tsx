@@ -27,13 +27,13 @@ export type SegmentedProps<T extends string> = {
 
 const PADDING = 3;
 
-export function Segmented<T extends string>({ options, value, onChange, style }: SegmentedProps<T>) {
+export function Segmented<T extends string>({ options = [], value, onChange, style }: SegmentedProps<T>) {
   const theme = useTheme();
   const scheme = useColorSchemeResolved();
   const [trackWidth, setTrackWidth] = useState(0);
 
-  const count = options.length;
-  const segWidth = trackWidth > 0 ? (trackWidth - PADDING * 2) / count : 0;
+  const count = options?.length ?? 0;
+  const segWidth = trackWidth > 0 && count > 0 ? (trackWidth - PADDING * 2) / count : 0;
   const index = Math.max(0, options.findIndex((o) => o.value === value));
 
   const translateX = useSharedValue(0);

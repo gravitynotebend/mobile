@@ -1,29 +1,38 @@
 /**
  * Таб-бар для iOS.
  *
- * Фон НЕ задаётся намеренно — чтобы сохранить системный liquid glass таб-бар
- * (iOS 26+). Управляем только акцентом выделения и поведением сворачивания при
- * прокрутке. Иконки — SF Symbols.
+ * Фон не задаётся намеренно — чтобы сохранить системный полупрозрачный
+ * таб-бар iOS. Перешли со `unstable-native-tabs` на стандартный `Tabs`,
+ * чтобы использовать HugeIcons через `tabBarIcon`.
  */
-import { NativeTabs } from 'expo-router/unstable-native-tabs';
+import { HugeiconsIcon } from '@hugeicons/react-native';
+import { Tabs } from 'expo-router';
 
 import { TAB_DEFS } from '@/components/tabs';
 import { useTheme } from '@/hooks/use-theme';
 
 export default function AppTabs() {
   const theme = useTheme();
+
   return (
-    <NativeTabs
-      tintColor={theme.primary}
-      minimizeBehavior="onScrollDown"
-      iconColor={{ default: theme.textTertiary, selected: theme.primary }}
-      labelStyle={{ selected: { color: theme.primary } }}>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: theme.primary,
+        tabBarInactiveTintColor: theme.textTertiary,
+      }}>
       {TAB_DEFS.map((tab) => (
-        <NativeTabs.Trigger key={tab.name} name={tab.name}>
-          <NativeTabs.Trigger.Label>{tab.label}</NativeTabs.Trigger.Label>
-          <NativeTabs.Trigger.Icon sf={tab.sf} md={tab.md} />
-        </NativeTabs.Trigger>
+        <Tabs.Screen
+          key={tab.name}
+          name={tab.name}
+          options={{
+            title: tab.label,
+            tabBarIcon: ({ color, size }) => (
+              <HugeiconsIcon icon={tab.icon} size={size} color={color} />
+            ),
+          }}
+        />
       ))}
-    </NativeTabs>
+    </Tabs>
   );
 }

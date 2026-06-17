@@ -4,7 +4,7 @@
  * Обёрнут в `observer` и читает `themePref$` точечно, поэтому перерисовывается
  * только сам переключатель при смене предпочтения.
  */
-import { observer, use$ } from '@legendapp/state/react';
+import { observer } from '@legendapp/state/react';
 
 import { ComputerIcon, Moon02Icon, Sun03Icon } from '@/icons';
 import { setThemePref, themePref$, type ThemePref } from '@/state/theme';
@@ -17,6 +17,6 @@ const OPTIONS: SegmentedOption<ThemePref>[] = [
 ];
 
 export const ThemeToggle = observer(function ThemeToggle() {
-  const pref = use$(themePref$);
+  const pref = themePref$.get();
   return <Segmented options={OPTIONS} value={pref} onChange={setThemePref} />;
 });
