@@ -11,3 +11,6 @@ export const Fonts = {
 } as const;
 
 export const BottomTabInset = 50;
+
+/** На iOS поднимаем поле ввода над клавиатурой отступом. */
+export const KeyboardBehavior: 'padding' | 'height' | 'position' | undefined = 'padding';

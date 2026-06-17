@@ -14,3 +14,6 @@ export const Fonts = {
 } as const;
 
 export const BottomTabInset = 64;
+
+/** Поведение `KeyboardAvoidingView`. На Android полагаемся на `adjustResize`. */
+export const KeyboardBehavior: 'padding' | 'height' | 'position' | undefined = undefined;

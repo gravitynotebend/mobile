@@ -7,3 +7,6 @@ export const Fonts = {
 } as const;
 
 export const BottomTabInset = 80;
+
+/** На Android полагаемся на `adjustResize` (поведение не задаём). */
+export const KeyboardBehavior: 'padding' | 'height' | 'position' | undefined = undefined;

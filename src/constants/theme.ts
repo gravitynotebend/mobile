@@ -6,7 +6,7 @@
  * чтобы не использовать `Platform.select`.
  */
 export { Colors, type ThemeColor } from '@/theme/tokens';
-export { Fonts, BottomTabInset } from '@/constants/platform';
+export { Fonts, BottomTabInset, KeyboardBehavior } from '@/constants/platform';
 
 export const Spacing = {
   half: 2,

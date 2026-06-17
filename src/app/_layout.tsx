@@ -1,3 +1,4 @@
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
@@ -27,19 +28,22 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={navThemeFor(scheme)}>
-        <AnimatedSplashOverlay />
-        <Stack
-          screenOptions={{
-            headerShadowVisible: false,
-            headerStyle: { backgroundColor: c.bgContainer },
-            headerTitleStyle: { color: c.textHeading, fontWeight: font.weight.semibold },
-            headerTintColor: c.primary,
-            contentStyle: { backgroundColor: c.bgLayout },
-          }}>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="notifications" options={{ title: 'Уведомления' }} />
-          <Stack.Screen name="profile" options={{ title: 'Профиль' }} />
-        </Stack>
+        <BottomSheetModalProvider>
+          <AnimatedSplashOverlay />
+          <Stack
+            screenOptions={{
+              headerShadowVisible: false,
+              headerStyle: { backgroundColor: c.bgContainer },
+              headerTitleStyle: { color: c.textHeading, fontWeight: font.weight.semibold },
+              headerTintColor: c.primary,
+              contentStyle: { backgroundColor: c.bgLayout },
+            }}>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="assistant" options={{ headerShown: false }} />
+            <Stack.Screen name="notifications" options={{ title: 'Уведомления' }} />
+            <Stack.Screen name="profile" options={{ title: 'Профиль' }} />
+          </Stack>
+        </BottomSheetModalProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
   );
