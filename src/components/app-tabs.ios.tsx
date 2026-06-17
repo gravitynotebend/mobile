@@ -1,8 +1,9 @@
 /**
- * Таб-бар по умолчанию (Android и прочие нативные цели).
+ * Таб-бар для iOS.
  *
- * Сплошной фон из темы + индикатор и ripple в фирменном цвете. Версия для iOS
- * с liquid glass — в `app-tabs.ios.tsx`.
+ * Фон НЕ задаётся намеренно — чтобы сохранить системный liquid glass таб-бар
+ * (iOS 26+). Управляем только акцентом выделения и поведением сворачивания при
+ * прокрутке. Иконки — SF Symbols.
  */
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
 
@@ -13,15 +14,10 @@ export default function AppTabs() {
   const theme = useTheme();
   return (
     <NativeTabs
-      backgroundColor={theme.bgContainer}
-      indicatorColor={theme.primarySoft}
-      rippleColor={theme.primarySoft}
       tintColor={theme.primary}
+      minimizeBehavior="onScrollDown"
       iconColor={{ default: theme.textTertiary, selected: theme.primary }}
-      labelStyle={{
-        default: { color: theme.textTertiary },
-        selected: { color: theme.primary },
-      }}>
+      labelStyle={{ selected: { color: theme.primary } }}>
       {TAB_DEFS.map((tab) => (
         <NativeTabs.Trigger key={tab.name} name={tab.name}>
           <NativeTabs.Trigger.Label>{tab.label}</NativeTabs.Trigger.Label>
