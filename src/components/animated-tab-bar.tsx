@@ -5,16 +5,17 @@
  * – Чистый, лаконичный вид без визуального шума.
  * – Чёткая обратная связь: активная вкладка выделяется цветом и фоновой
  *   подсветкой, неактивная — приглушена.
- * – Плавные, но сдержанные анимации (Reanimated withSpring), чтобы не
- *   отвлекать от рабочего процесса.
+ * – Чёткие, быстрые переходы (Reanimated 4, короткий `withTiming` + cubic-out,
+ *   без пружин и «желе»), чтобы не отвлекать от рабочего процесса.
  * – Доступность: крупные тач-зоны, контрастные цвета, подписи к иконкам.
  */
 import { useCallback, useEffect, memo } from 'react';
 import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import Animated, {
+  Easing,
   useAnimatedStyle,
   useSharedValue,
-  withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -23,6 +24,10 @@ import { useTheme } from '@/hooks/use-theme';
 import { space } from '@/theme/tokens';
 import { Icon } from '@/ui/icon';
 import { Text } from '@/ui/text';
+
+/** Чёткий «несклеенный» переход без overshoot. */
+const SNAP = { duration: 220, easing: Easing.out(Easing.cubic) } as const;
+const SNAP_FAST = { duration: 160, easing: Easing.out(Easing.cubic) } as const;
 
 /** Reanimated-обёртки для избежания конфликтов типов с memo-компонентами. */
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
@@ -41,14 +46,8 @@ const TabItem = memo(function TabItem({ tab, isFocused, onPress, tabWidth }: Tab
   const labelOpacity = useSharedValue(isFocused ? 1 : 0.7);
 
   useEffect(() => {
-    scale.value = withSpring(isFocused ? 1 : 0.92, {
-      damping: 20,
-      stiffness: 200,
-    });
-    labelOpacity.value = withSpring(isFocused ? 1 : 0.7, {
-      damping: 25,
-      stiffness: 200,
-    });
+    scale.value = withTiming(isFocused ? 1 : 0.92, SNAP_FAST);
+    labelOpacity.value = withTiming(isFocused ? 1 : 0.7, SNAP_FAST);
   }, [isFocused, scale, labelOpacity]);
 
   const animatedIconStyle = useAnimatedStyle(() => ({
@@ -96,10 +95,7 @@ export function AnimatedTabBar({ state, navigation }: any) {
   const indicatorX = useSharedValue(state.index * tabWidth);
 
   useEffect(() => {
-    indicatorX.value = withSpring(state.index * tabWidth, {
-      damping: 20,
-      stiffness: 180,
-    });
+    indicatorX.value = withTiming(state.index * tabWidth, SNAP);
   }, [state.index, tabWidth, indicatorX]);
 
   const indicatorStyle = useAnimatedStyle(() => ({
